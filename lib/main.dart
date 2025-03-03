@@ -1,122 +1,197 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp()); 
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false, 
+      home: FlashcardScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class FlashcardScreen extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _FlashcardScreenState createState() => _FlashcardScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _FlashcardScreenState extends State<FlashcardScreen> {
+    final List<Map<String, String>> flashcards = [
+    {"kanji": "日", "meaning": "Sun / Day"},
+    {"kanji": "月", "meaning": "Moon / Month"},
+    {"kanji": "火", "meaning": "Fire"},
+    {"kanji": "水", "meaning": "Water"},
+    {"kanji": "木", "meaning": "Tree / Wood"},
+    {"kanji": "金", "meaning": "Gold / Money"},
+    {"kanji": "土", "meaning": "Earth / Ground"},
+    {"kanji": "山", "meaning": "Mountain"},
+    {"kanji": "川", "meaning": "River"},
+    {"kanji": "田", "meaning": "Rice Field"},
+    {"kanji": "人", "meaning": "Person"},
+    {"kanji": "子", "meaning": "Child"},
+    {"kanji": "女", "meaning": "Woman"},
+    {"kanji": "男", "meaning": "Man"},
+    {"kanji": "母", "meaning": "Mother"},
+    {"kanji": "父", "meaning": "Father"},
+    {"kanji": "友", "meaning": "Friend"},
+    {"kanji": "先", "meaning": "Before / Ahead"},
+    {"kanji": "生", "meaning": "Life / Birth"},
+    {"kanji": "学", "meaning": "Study / Learning"},
+    {"kanji": "校", "meaning": "School"},
+    {"kanji": "年", "meaning": "Year"},
+    {"kanji": "時", "meaning": "Time / Hour"},
+    {"kanji": "今", "meaning": "Now"},
+    {"kanji": "午", "meaning": "Noon"},
+    {"kanji": "前", "meaning": "Before"},
+    {"kanji": "後", "meaning": "After / Behind"},
+    {"kanji": "間", "meaning": "Interval / Between"},
+    {"kanji": "東", "meaning": "East"},
+    {"kanji": "西", "meaning": "West"},
+    {"kanji": "南", "meaning": "South"},
+    {"kanji": "北", "meaning": "North"},
+    {"kanji": "左", "meaning": "Left"},
+    {"kanji": "右", "meaning": "Right"},
+    {"kanji": "大", "meaning": "Big"},
+    {"kanji": "小", "meaning": "Small"},
+    {"kanji": "高", "meaning": "Tall / Expensive"},
+    {"kanji": "安", "meaning": "Cheap / Safe"},
+    {"kanji": "新", "meaning": "New"},
+    {"kanji": "古", "meaning": "Old"},
+    {"kanji": "白", "meaning": "White"},
+    {"kanji": "青", "meaning": "Blue"},
+    {"kanji": "赤", "meaning": "Red"},
+    {"kanji": "黒", "meaning": "Black"},
+    {"kanji": "多", "meaning": "Many / Much"},
+    {"kanji": "少", "meaning": "Few / Little"},
+    {"kanji": "早", "meaning": "Early / Fast"},
+    {"kanji": "行", "meaning": "Go / Carry Out"},
+    {"kanji": "来", "meaning": "Come"},
+    {"kanji": "帰", "meaning": "Return"},
+    {"kanji": "食", "meaning": "Eat"},
+    {"kanji": "飲", "meaning": "Drink"},
+    {"kanji": "見", "meaning": "See / Look"},
+    {"kanji": "聞", "meaning": "Hear / Listen"},
+    {"kanji": "書", "meaning": "Write"},
+    {"kanji": "話", "meaning": "Speak / Talk"},
+    {"kanji": "読", "meaning": "Read"},
+    {"kanji": "買", "meaning": "Buy"},
+    {"kanji": "休", "meaning": "Rest / Break"},
+    {"kanji": "入", "meaning": "Enter / Put In"},
+    {"kanji": "出", "meaning": "Exit / Take Out"},
+    {"kanji": "立", "meaning": "Stand"},
+    {"kanji": "座", "meaning": "Sit"},
+    {"kanji": "作", "meaning": "Make / Produce"},
+    {"kanji": "使", "meaning": "Use"},
+    {"kanji": "持", "meaning": "Hold / Have"},
+    {"kanji": "知", "meaning": "Know"},
+    {"kanji": "住", "meaning": "Live / Reside"},
+    {"kanji": "売", "meaning": "Sell"},
+    {"kanji": "買", "meaning": "Buy"},
+    {"kanji": "話", "meaning": "Talk"},
+    {"kanji": "言", "meaning": "Say"},
+    {"kanji": "語", "meaning": "Language / Word"},
+    {"kanji": "聞", "meaning": "Listen / Ask"},
+    {"kanji": "読", "meaning": "Read"},
+    {"kanji": "書", "meaning": "Write"},
+    {"kanji": "見", "meaning": "See"},
+    {"kanji": "聞", "meaning": "Hear"},
+    {"kanji": "思", "meaning": "Think"},
+    {"kanji": "知", "meaning": "Know"},
+    {"kanji": "分", "meaning": "Minute / Understand"},
+    {"kanji": "半", "meaning": "Half"},
+    {"kanji": "毎", "meaning": "Every"},
+    {"kanji": "週", "meaning": "Week"},
+    {"kanji": "曜", "meaning": "Day of the Week"},
+    {"kanji": "午", "meaning": "Noon"},
+    {"kanji": "前", "meaning": "Before"},
+    {"kanji": "後", "meaning": "After"},
+    {"kanji": "何", "meaning": "What"},
+    {"kanji": "百", "meaning": "Hundred"},
+    {"kanji": "千", "meaning": "Thousand"},
+    {"kanji": "万", "meaning": "Ten Thousand"},
+    {"kanji": "円", "meaning": "Yen / Circle"},
+    {"kanji": "時", "meaning": "Time / Hour"},
+    {"kanji": "間", "meaning": "Interval / Between"},
+    {"kanji": "南", "meaning": "South"},
+    {"kanji": "東", "meaning": "East"},
+    {"kanji": "西", "meaning": "West"},
+    {"kanji": "北", "meaning": "North"},
+    {"kanji": "左", "meaning": "Left"},
+    {"kanji": "右", "meaning": "Right"},
+    {"kanji": "外", "meaning": "Outside"},
+    {"kanji": "内", "meaning": "Inside"},
+    {"kanji": "男", "meaning": "Man / Male"},
+    {"kanji": "女", "meaning": "Woman / Female"},
+    {"kanji": "子", "meaning": "Child"},
+    {"kanji": "父", "meaning": "Father"},
+    {"kanji": "母", "meaning": "Mother"},
+    {"kanji": "兄", "meaning": "Older Brother"},
+    {"kanji": "姉", "meaning": "Older Sister"},
+    {"kanji": "弟", "meaning": "Younger Brother"},
+    {"kanji": "妹", "meaning": "Younger Sister"},
+    {"kanji": "家", "meaning": "House / Home"},
+    {"kanji": "友", "meaning": "Friend"},
+    {"kanji": "名", "meaning": "Name"},
+    ];
 
-  void _incrementCounter() {
+
+  int currentIndex = 0; 
+
+  void showNextFlashcard() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      currentIndex = (currentIndex + 1) % flashcards.length;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text("Let's learn Japanese"),
+        backgroundColor: Colors.redAccent,
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+        child: Container(
+          width: 300, 
+          height: 400,
+          child: Card(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20), 
             ),
-          ],
+            child: Padding(
+              padding: const EdgeInsets.all(30.0), 
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, 
+                children: [
+                  Text(
+                    "${flashcards[currentIndex]["kanji"]}",
+                    style: TextStyle(fontSize: 80, fontWeight: FontWeight.bold), 
+                  ),
+                  SizedBox(height: 20), 
+                  Text(
+                    "${flashcards[currentIndex]["meaning"]}",
+                    style: TextStyle(fontSize: 34), 
+                  ),
+                  SizedBox(height: 40), 
+                  ElevatedButton(
+                    onPressed: showNextFlashcard,
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15), 
+                      textStyle: TextStyle(fontSize: 20), 
+                    ),
+                    child: Text("Next"),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
