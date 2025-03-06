@@ -1,33 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-
-void main() {
-  runApp(MyApp()); 
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, 
-      home: FlashcardScreen(),
-      theme: ThemeData(
-        brightness: Brightness.light, 
-        primaryColor: Colors.redAccent,
-      ),
-    );
-  }
-}
-
-class FlashcardScreen extends StatefulWidget {
-  @override
-  _FlashcardScreenState createState() => _FlashcardScreenState();
-}
-
-class _FlashcardScreenState extends State<FlashcardScreen> {
-
-  final FlutterTts flutterTts = FlutterTts();
-
+/*
   final List<Map<String, String>> flashcards = [
   {"kanji": "日", "reading": "にち", "meaning": "Sun / Day", "example": "今日はいい天気ですね。", "example_translation": "The weather is nice today."},
   {"kanji": "月", "reading": "げつ", "meaning": "Moon / Month", "example": "来月、日本へ行きます。", "example_translation": "Next month, I will go to Japan."},
@@ -99,126 +70,26 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
   {"kanji": "出", "reading": "でる", "meaning": "To Leave / Exit", "example": "家を出ました。", "example_translation": "I left the house."},
   {"kanji": "入", "reading": "はいる", "meaning": "To Enter", "example": "部屋に入りました。", "example_translation": "I entered the room."}
 ];
+*/
 
+import 'package:flutter/material.dart';
+import 'screens/deck_selection_screen.dart';
 
-  int currentIndex = 0; 
+void main() {
+  runApp(MyApp());
+}
 
-  void showNextFlashcard() {
-    setState(() {
-      currentIndex = (currentIndex + 1) % flashcards.length;
-    });
-  }
-
-
-  Future<void> speak(String text) async {
-    await flutterTts.setLanguage("ja-JP"); 
-    await flutterTts.setPitch(1.0);  
-    await flutterTts.setSpeechRate(0.5); 
-    await flutterTts.speak(text);
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final flashcard = flashcards[currentIndex];
-
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: Text("Let's learn Japanese", style: TextStyle(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        backgroundColor: Colors.redAccent,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: AnimatedSwitcher(
-            duration: Duration(milliseconds: 700), 
-            transitionBuilder: (child, animation) {
-              return FadeTransition(opacity: animation, child: child);  
-            },
-            child: Card(
-              key: ValueKey<int>(currentIndex),  
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              elevation: 8,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          flashcard["kanji"]!,
-                          style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.black87),
-                        ),
-                        SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  flashcard["reading"]!,
-                                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Colors.blueAccent),
-                                ),
-                                SizedBox(width: 8),
-                                IconButton(
-                                  icon: Icon(Icons.volume_up, color: Colors.blueAccent),
-                                  onPressed: () => speak(flashcard["reading"]!),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              flashcard["meaning"]!,
-                              style: TextStyle(fontSize: 18, color: Colors.black54),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            flashcard["example"]!,
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black87),
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.volume_up, color: Colors.blueAccent),
-                          onPressed: () => speak(flashcard["example"]!),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      flashcard["example_translation"]!,
-                      style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black54),
-                    ),
-                    SizedBox(height: 20),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: showNextFlashcard,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.redAccent,
-                          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        child: Text("Next", style: TextStyle(fontSize: 18, color: Colors.white)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DeckSelectionScreen(), 
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.redAccent,
       ),
     );
   }
 }
+
